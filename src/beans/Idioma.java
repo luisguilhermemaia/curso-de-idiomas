@@ -4,23 +4,23 @@ package beans;
  * Created by guilherme on 20/02/17.
  */
 public class Idioma {
-    private String codigo;
+    private String id;
     private String descricao;
 
     public Idioma() {
     }
 
-    public Idioma(String codigo, String descricao) {
-        this.codigo = codigo;
+    public Idioma(String id, String descricao) {
+        this.id = id;
         this.descricao = descricao;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getId() {
+        return id;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDescricao() {

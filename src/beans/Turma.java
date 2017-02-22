@@ -9,18 +9,15 @@ import java.util.List;
 public class Turma {
     private String id;
     private String professorId;
-    private String cursoId;
-    private List<Aluno> listaDeAlunos = new ArrayList<>();
+    private String idiomaId;
 
-    public Turma(String id) {
-        this.id = id;
+    public Turma() {
     }
 
-    public Turma(String id, String professorId, String cursoId, List<Aluno> listaDeAlunos) {
+    public Turma(String id, String professorId, String idiomaId) {
         this.id = id;
         this.professorId = professorId;
-        this.cursoId = cursoId;
-        this.listaDeAlunos = listaDeAlunos;
+        this.idiomaId = idiomaId;
     }
 
     public String getId() {
@@ -39,19 +36,13 @@ public class Turma {
         this.professorId = professorId;
     }
 
-    public String getCursoId() {
-        return cursoId;
+    public String getIdiomaId() {
+        return idiomaId;
     }
 
-    public void setCursoId(String cursoId) {
-        this.cursoId = cursoId;
+    public void setIdiomaId(String idiomaId) {
+        this.idiomaId = idiomaId;
     }
 
-    public List<Aluno> getListaDeAlunos() {
-        return listaDeAlunos;
-    }
 
-    public void setListaDeAlunos(List<Aluno> listaDeAlunos) {
-        this.listaDeAlunos = listaDeAlunos;
-    }
 }

@@ -1,61 +1,58 @@
 package dao;
 
-import beans.Aluno;
+import beans.Idioma;
+
 import java.io.*;
 import java.util.ArrayList;
 
-public class AlunoDao {
-    private static final String NOME_ARQUIVO = "Alunos.txt";
-    private static ArrayList<Aluno> alunosAux = new ArrayList<>();
+public class IdiomaDao {
+    private static final String NOME_ARQUIVO = "Professores.txt";
+    private static ArrayList<Idioma> idiomaAux = new ArrayList<>();
 
-    public void inserir(Aluno a) {
-        alunosAux.add(a);
-
+    public void inserir(Idioma p) {
+        idiomaAux.add(p);
         escreverArquivo();
     }
 
     public void excluir(String id) {
-        Aluno alunoTemp = buscarPorId(id);
-        alunosAux.remove(alunoTemp);
+        Idioma idiomaTemp = buscarPorId(id);
+        idiomaAux.remove(idiomaTemp);
+        escreverArquivo();
+    }
+
+    public void alterar(Idioma i) {
+        Idioma idiomaTemp = buscarPorId(i.getId());
+
+        idiomaTemp.setId(i.getId());
+        idiomaTemp.setDescricao(i.getDescricao());
 
         escreverArquivo();
     }
 
-    public void alterar(Aluno a) {
-        Aluno alunoTemp = buscarPorId(a.getId());
-
-        //Alterar os dados do item do arraylist, conforme o argumento passado
-
-        alunoTemp.setId(a.getId());
-        alunoTemp.setNome(a.getNome());
-
-        escreverArquivo();
-    }
-
-    public Aluno buscarPorId(String id) {
-        for (Aluno alunoTemp : alunosAux) {
-            if (alunoTemp.getId().equals(id)) {
-                return alunoTemp;
+    public Idioma buscarPorId(String id) {
+        for (Idioma idiomaTemp : idiomaAux) {
+            if (idiomaTemp.getId().equals(id)) {
+                return idiomaTemp;
             }
         }
 
         return null;
     }
 
-    public ArrayList<Aluno> buscarPorNome(String nome) {
-        ArrayList<Aluno> busca = new ArrayList<Aluno>();
+    public ArrayList<Idioma> buscarPorDescricao(String descricao) {
+        ArrayList<Idioma> busca = new ArrayList<>();
 
-        for (Aluno alunoTemp : alunosAux) {
-            if (alunoTemp.getNome().toUpperCase().contains(nome.toUpperCase())) {
-                busca.add(alunoTemp);
+        for (Idioma idiomaTemp : idiomaAux) {
+            if (idiomaTemp.getDescricao().toUpperCase().contains(descricao.toUpperCase())) {
+                busca.add(idiomaTemp);
             }
         }
 
         return busca;
     }
 
-    public ArrayList<Aluno> listar() {
-        return alunosAux;
+    public ArrayList<Idioma> listar() {
+        return idiomaAux;
     }
 
     private void escreverArquivo() {
@@ -67,8 +64,8 @@ public class AlunoDao {
             fw = new FileWriter(f);
             bw = new BufferedWriter(fw);
 
-            for (Aluno alunoTemp : alunosAux) {
-                bw.write(alunoTemp.getId() + ";" + alunoTemp.getNome() + ";" + alunoTemp.getIdade() + ";");
+            for (Idioma idiomaTemp : idiomaAux) {
+                bw.write(idiomaTemp.getId() + ";" + idiomaTemp.getDescricao() + ";");
                 bw.newLine();
             }
 
@@ -96,8 +93,8 @@ public class AlunoDao {
             String linha;
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(";");
-                Aluno a = new Aluno(dados[0], dados[1],Integer.parseInt(dados[3]));
-                alunosAux.add(a);
+                Idioma p = new Idioma(dados[0], dados[1]);
+                idiomaAux.add(p);
             }
 
         } catch (IOException e) {

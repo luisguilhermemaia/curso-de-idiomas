@@ -1,61 +1,58 @@
 package dao;
 
-import beans.Aluno;
+import beans.Turma;
+
 import java.io.*;
 import java.util.ArrayList;
 
-public class AlunoDao {
-    private static final String NOME_ARQUIVO = "Alunos.txt";
-    private static ArrayList<Aluno> alunosAux = new ArrayList<>();
+public class TurmaDao {
+    private static final String NOME_ARQUIVO = "Turmas.txt";
+    private static ArrayList<Turma> turmaAux = new ArrayList<>();
 
-    public void inserir(Aluno a) {
-        alunosAux.add(a);
+    public void inserir(Turma a) {
+        turmaAux.add(a);
 
         escreverArquivo();
     }
 
     public void excluir(String id) {
-        Aluno alunoTemp = buscarPorId(id);
-        alunosAux.remove(alunoTemp);
+        Turma turmaTemp = buscarPorId(id);
+        turmaAux.remove(turmaTemp);
 
         escreverArquivo();
     }
 
-    public void alterar(Aluno a) {
-        Aluno alunoTemp = buscarPorId(a.getId());
+    public void alterar(Turma t) {
+        Turma turmaTemp = buscarPorId(t.getId());
 
-        //Alterar os dados do item do arraylist, conforme o argumento passado
-
-        alunoTemp.setId(a.getId());
-        alunoTemp.setNome(a.getNome());
+        turmaTemp.setIdiomaId(t.getIdiomaId());
+        turmaTemp.setProfessorId(t.getProfessorId());
+        turmaTemp.setId(t.getId());
 
         escreverArquivo();
     }
 
-    public Aluno buscarPorId(String id) {
-        for (Aluno alunoTemp : alunosAux) {
-            if (alunoTemp.getId().equals(id)) {
-                return alunoTemp;
+    public Turma buscarPorId(String id) {
+        for (Turma turmaTemp : turmaAux) {
+            if (turmaTemp.getId().equals(id)) {
+                return turmaTemp;
             }
         }
 
         return null;
     }
 
-    public ArrayList<Aluno> buscarPorNome(String nome) {
-        ArrayList<Aluno> busca = new ArrayList<Aluno>();
-
-        for (Aluno alunoTemp : alunosAux) {
-            if (alunoTemp.getNome().toUpperCase().contains(nome.toUpperCase())) {
-                busca.add(alunoTemp);
+    public Turma buscarPorProfessorId(String professorId) {
+        for (Turma turmaTemp : turmaAux) {
+            if (turmaTemp.getProfessorId().equals(professorId)) {
+                return turmaTemp;
             }
         }
-
-        return busca;
+        return null;
     }
 
-    public ArrayList<Aluno> listar() {
-        return alunosAux;
+    public ArrayList<Turma> listar() {
+        return turmaAux;
     }
 
     private void escreverArquivo() {
@@ -67,8 +64,8 @@ public class AlunoDao {
             fw = new FileWriter(f);
             bw = new BufferedWriter(fw);
 
-            for (Aluno alunoTemp : alunosAux) {
-                bw.write(alunoTemp.getId() + ";" + alunoTemp.getNome() + ";" + alunoTemp.getIdade() + ";");
+            for (Turma turmaTemp : turmaAux) {
+                bw.write(turmaTemp.getId() + ";" + turmaTemp.getProfessorId() + ";" + turmaTemp.getIdiomaId() + ";");
                 bw.newLine();
             }
 
@@ -96,8 +93,8 @@ public class AlunoDao {
             String linha;
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(";");
-                Aluno a = new Aluno(dados[0], dados[1],Integer.parseInt(dados[3]));
-                alunosAux.add(a);
+                Turma a = new Turma(dados[0], dados[1],dados[3]);
+                turmaAux.add(a);
             }
 
         } catch (IOException e) {

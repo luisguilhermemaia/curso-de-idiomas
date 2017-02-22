@@ -6,16 +6,14 @@ package beans;
 public class Aluno {
     private String id;
     private String nome;
-    private String senha;
     private int idade;
 
     public Aluno() {
     }
 
-    public Aluno(String id, String nome, String senha, int idade) {
+    public Aluno(String id, String nome, int idade) {
         this.id = id;
         this.nome = nome;
-        this.senha = senha;
         this.idade = idade;
     }
 
@@ -33,14 +31,6 @@ public class Aluno {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public int getIdade() {

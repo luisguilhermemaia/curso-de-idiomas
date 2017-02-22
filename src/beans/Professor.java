@@ -4,19 +4,15 @@ package beans;
  * Created by guilherme on 20/02/17.
  */
 public class Professor {
-    private String nome;
     private String id;
-    private String senha;
-    private String idioma;
+    private String nome;
 
     public Professor() {
     }
 
-    public Professor(String nome, String id, String senha, String idioma) {
-        this.nome = nome;
+    public Professor(String id, String nome) {
         this.id = id;
-        this.senha = senha;
-        this.idioma = idioma;
+        this.nome = nome;
     }
 
     public String getNome() {
@@ -35,19 +31,4 @@ public class Professor {
         this.id = id;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getIdioma() {
-        return idioma;
-    }
-
-    public void setIdioma(String idioma) {
-        this.idioma = idioma;
-    }
 }
